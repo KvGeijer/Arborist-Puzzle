@@ -49,7 +49,6 @@ pub fn preprocess(content: &str) -> String {
         }
     }
 
-    println!("PROGRAM:\n{}", program);
     program
 }
 

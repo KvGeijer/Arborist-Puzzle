@@ -1,4 +1,5 @@
 mod preprocessor;
+mod tokenizer;
 mod interpreter;
 
 fn main() {
@@ -9,5 +10,13 @@ fn main() {
     let contents = std::fs::read_to_string(name)
         .expect("Could not find file");
 
-    let _processed = preprocessor::preprocess(&contents);    
+    let preprocessed = preprocessor::preprocess(&contents);    
+    println!("PROGRAM:\n{}", preprocessed);
+
+    let tokens = tokenizer::tokenize(preprocessed);
+    for token in tokens.iter().take(10) {
+        println!("{:?}", token);
+    }
+
+    interpreter::interpret(tokens)
 }
