@@ -35,6 +35,10 @@ int := 0|[1-9]+
 * block
   * First opens a nested local namespace. Then evaluates the expressions in order and returns the value of the last one. 
 
+## Namespaces
+
+This is not as easy as I initially thought. Thanks to the book Crafting interpreters for alerting me to the importance of closures if we want to treat functions as first class citicens (which this language does). The main issue is what to do if a function outlives the local namespace, while still using its variables. A simple way to solve this would be if all namespaces where nested hashmaps, and we just never garbage collected them until after they are out of use. This would not be that hard, although not efficient either. But a good solution. I think the nested map structure is the most intuitive way to do it as well, so people might even make it possible without realizing it.
+
 ### Description
 
 Each expression should just be a pair of parantheses, where we invoke the function/subroutine that is the first value in the list, and use the rest as arguments. We have a few special functions, which don't really work as normal ones.
