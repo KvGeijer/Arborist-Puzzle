@@ -13,19 +13,18 @@ expr := '(' func ')'                \
     | int
 
 func := expr expr*                  \
-    | LET expr block expr           \
+    | LET expr expr                 \
     | IF expr expr expr             \
     | PRINT expr                    \
-    | BLOCK block                   \
+    | BLOCK '(' expr+ ')'           \
     | SUB expr expr
 
-block := '(' expr* ')'              \
 int := 0|[1-9]+            
 
 ### Functions
 
 * eval
-  * The normal function call which is when none of the special ones are invoked. It evaluates the id, arguments, then creates a new namespace where the arguments are bound to the parameters of the function defined in the local scope as the first expression. TODO: Should the namespace have access to any variables outside if the function definition? Yes that would be cool. When are the parameter expressions defined?
+  * The normal function call which is when none of the special ones are invoked. It evaluates the id, arguments, then creates a new namespace where each argument is bound to the nagative index of it's position in. So te first arg will be bound to -1, second -2 and so on. This way the declarations of the functions don't have to worry about parameters at all, just assume they will be bound to certain things. Also nice to recommend negative numbers not be identifiers to get around claches (unless you want to use them for default arguments).
 
 * let
   * Binds an identifier to a function which is added to the current namespace. Returns the result of that expression.

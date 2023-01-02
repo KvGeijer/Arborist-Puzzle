@@ -1,22 +1,22 @@
 # X 16
 # Y 17
 # Z 18
-# ADD 32
+# ADD 16
 
 
 (
 	// Give them the values of their ascii codes
-	(LET X () 88)
-	(LET Y () 89)
-	(LET Z () 90)
+	(LET X 88)
+	(LET Y 89)
+	(LET Z 90)
 
 	// Print normally
 	(PRINT (X))
 	(PRINT (Y))
 	(PRINT (Z))
 
-	(LET ADD (8 9) 
-		(SUB ((8) (SUB 0 (9))))
+	(LET ADD
+		(SUB (-1) (SUB 0 (-2)))
 	)
 
 	// Print by adding
