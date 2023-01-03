@@ -1,6 +1,7 @@
 mod preprocessor;
 mod tokenizer;
 mod interpreter;
+mod parser;
 
 fn main() {
     // Get the name of the file
@@ -18,5 +19,7 @@ fn main() {
         println!("{:?}", token);
     }
 
-    interpreter::interpret(tokens)
+    let syntax_tree = parser::parse(tokens).expect("Could not parse!");
+    
+    interpreter::interpret(syntax_tree)
 }
