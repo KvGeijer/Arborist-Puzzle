@@ -21,5 +21,5 @@ fn main() {
 
     let syntax_tree = parser::parse(tokens).expect("Could not parse!");
     
-    interpreter::interpret(syntax_tree)
+    interpreter::interpret(&syntax_tree);
 }
