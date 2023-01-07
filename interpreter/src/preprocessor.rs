@@ -1,10 +1,9 @@
 use std::collections::HashMap;
 
-const PREDEF_MACROS: [&str; 5] = [
+const PREDEF_MACROS: [&str; 4] = [
     "LET",
     "IF",
     "PRINT",
-    "BLOCK",
     "SUB",
 ];
 
@@ -55,7 +54,7 @@ pub fn preprocess(content: &str) -> String {
 fn init_macros() -> HashMap<String, String> {
     // Initialized the hashmap with the preconfiured macros
     let mut macros = HashMap::new();
-    for (mac, ind) in PREDEF_MACROS.iter().zip(1..) {
+    for (mac, ind) in PREDEF_MACROS.iter().zip(0..) {
         macros.insert(mac.to_string(), ind.to_string());
     }
     macros

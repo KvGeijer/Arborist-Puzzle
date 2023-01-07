@@ -34,7 +34,8 @@ fn eval<'a>(expr: &'a Expr, base: Option<&'a Namespace<'a>>, arena: &'a Arena<Na
                 2 => {
                     // Print
                     let nbr = eval(&exprs[1], base, arena);
-                    print!("{}", nbr as u8 as char);
+                    println!("Char: {}", nbr as u8 as char);
+                    println!("i32: {}", nbr);
                     nbr
                 }
                 3 => {
@@ -45,18 +46,31 @@ fn eval<'a>(expr: &'a Expr, base: Option<&'a Namespace<'a>>, arena: &'a Arena<Na
                 }
                 nbr => {
                     // Normal function
-                    // into_iter?
-                    let args: Vec<i32> = exprs[1..]
-                        .into_iter()
-                        .map(|expr| eval(expr, base, arena))
-                        .collect();
-                    lookup(nbr, args, base, arena)
+                    let mut ns = lookup(nbr, base);
+                    let fexpr = ns.binding.1;
+
+                    // Temp arena for the args
+                    let exprarena = Arena::new();
+                    let nsarena = Arena::new();
+                    
+                    for (expr, id) in exprs[1..].into_iter().zip(1..) {
+                        let val = eval(expr, base, arena);
+                        let argexpr = exprarena.alloc(Expr::INT(val));
+                        ns = nsarena.alloc(Namespace{binding: (-id, argexpr), base: Some(ns)});
+                    }
+
+                    eval(fexpr, Some(ns), arena)
                 }
             }
         }
     }
 }
 
-fn lookup<'a>(id: i32, args: Vec<i32>, base: Option<&'a Namespace<'a>>, arena: &'a Arena<Namespace<'a>>) -> i32 {
-    0
+fn lookup<'a>(id: i32, base: Option<&'a Namespace<'a>>) -> &'a Namespace<'a> {
+    let ns = base.expect("Could not find nbr!");
+    if ns.binding.0 == id {
+        ns
+    } else {
+        lookup(id, ns.base)
+    }
 }
