@@ -1,0 +1,48 @@
+# X 16
+# Y 17
+# ADD 32
+# PRINTX 33
+# BLOCK 4
+
+
+// A function which does nothing, but evaluates all args in order
+(LET BLOCK 0 
+	// Give X the values of its ascii code
+	(LET X 88
+		(LET PRINTX (PRINT (X))
+			(BLOCK 
+				// Print normally
+				(PRINT 88)
+
+				// Print by reference
+				(PRINT (X))
+
+				// Print by function
+				(PRINTX)
+			
+				(LET ADD (SUB (-1) (SUB 0 (-2)))
+					(BLOCK 
+						// Print Z by adding
+						(PRINT (ADD (X) 2))
+
+						// Print A by subtracting 
+						(PRINT (SUB (X) 23))
+					)
+				)
+				(LET Y 89 
+					(IF (SUB (X) (Y)) 
+						// ERROR, not defined
+						(999)
+						// Redefine X to lower case
+						(LET X 120
+							(BLOCK
+								(PRINT (X))
+								(PRINTX)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+)

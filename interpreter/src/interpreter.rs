@@ -8,40 +8,37 @@ struct Namespace<'a> {
 }
 
 pub fn interpret(expr: &Expr) -> i32 {
-    // Could get rid of this, but fun to try
-    let arena = Arena::new();
-    eval(expr, None, &arena)
+    eval(expr, None)
 }
 
-fn eval<'a>(expr: &'a Expr, base: Option<&'a Namespace<'a>>, arena: &'a Arena<Namespace<'a>>) -> i32 {
+fn eval<'a>(expr: &'a Expr, base: Option<&'a Namespace<'a>>) -> i32 {
     match expr {
         Expr::INT(nbr) => *nbr,
         Expr::FUNC(exprs) => {
-            let op = eval(&exprs[0], base, arena);
+            let op = eval(&exprs[0], base);
             match op {
                 0 => {
                     // Bind
-                    let id = eval(&exprs[1], base, arena);
-                    let ns = arena.alloc(Namespace{binding: (id, &exprs[2]), base: base});
-                    eval(&exprs[3], Some(ns), arena)
+                    let id = eval(&exprs[1], base);
+                    let ns = Namespace{binding: (id, &exprs[2]), base: base};
+                    eval(&exprs[3], Some(&ns))
                 }
                 1 => {
                     // If
-                    let cond = eval(&exprs[1], base, arena);
-                    let ind = 2 + (cond > 0) as usize;
-                    eval(&exprs[ind], base, arena)
+                    let cond = eval(&exprs[1], base);
+                    let ind = 2 + (cond < 0) as usize;
+                    eval(&exprs[ind], base)
                 }
                 2 => {
                     // Print
-                    let nbr = eval(&exprs[1], base, arena);
-                    println!("Char: {}", nbr as u8 as char);
-                    println!("i32: {}", nbr);
+                    let nbr = eval(&exprs[1], base);
+                    print!("{}", nbr as u8 as char);
                     nbr
                 }
                 3 => {
                     // Sub
-                    let a = eval(&exprs[1], base, arena);
-                    let b = eval(&exprs[2], base, arena);
+                    let a = eval(&exprs[1], base);
+                    let b = eval(&exprs[2], base);
                     a - b
                 }
                 nbr => {
@@ -54,12 +51,12 @@ fn eval<'a>(expr: &'a Expr, base: Option<&'a Namespace<'a>>, arena: &'a Arena<Na
                     let nsarena = Arena::new();
                     
                     for (expr, id) in exprs[1..].into_iter().zip(1..) {
-                        let val = eval(expr, base, arena);
+                        let val = eval(expr, base);
                         let argexpr = exprarena.alloc(Expr::INT(val));
                         ns = nsarena.alloc(Namespace{binding: (-id, argexpr), base: Some(ns)});
                     }
 
-                    eval(fexpr, Some(ns), arena)
+                    eval(fexpr, Some(ns))
                 }
             }
         }
