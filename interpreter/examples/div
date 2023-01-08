@@ -1,0 +1,43 @@
+# BLOCK 4
+# ADD 32
+# MULT 33
+# DIV 34
+# KVOT 35
+# DIGIT 36
+# PINT 37
+
+(LET ADD
+	(SUB (-1) (SUB 0 (-2)))
+	(LET BLOCK 0
+		(LET MULT
+			(IF (-2)
+				(ADD (-1) (MULT (-1) (SUB (-2) 1)))
+				0
+			)
+			// Quickly overflows the stack
+			(LET DIV
+				(IF (ADD (-1) 1)
+					(ADD 1 (DIV (SUB (-1) (-2)) (-2)))
+					-1
+				)
+				// Only positive ints!
+				(LET PINT
+					(IF (-1)
+						(LET KVOT 
+							(DIV (-1) 10)
+							(LET DIGIT 
+								(SUB (-1) (MULT (KVOT) 10))
+								(BLOCK
+									(PINT (KVOT))
+									(PRINT (ADD 48 (DIGIT)))
+								)
+							)
+						)
+						0
+					)
+					(PINT 12345)
+				)
+			)
+		)
+	)
+)
