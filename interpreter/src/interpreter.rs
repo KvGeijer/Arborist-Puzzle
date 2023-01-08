@@ -26,7 +26,7 @@ fn eval<'a>(expr: &'a Expr, base: Option<&'a Namespace<'a>>) -> i32 {
                 1 => {
                     // If
                     let cond = eval(&exprs[1], base);
-                    let ind = 2 + (cond < 0) as usize;
+                    let ind = 2 + (cond <= 0) as usize;
                     eval(&exprs[ind], base)
                 }
                 2 => {
