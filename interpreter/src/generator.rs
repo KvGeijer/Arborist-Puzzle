@@ -2,6 +2,8 @@ use crate::parser::Expr;
 
 use rand::Rng;
 
+const REPL_PROB: u8 = 8;
+
 struct State {
 	prog: String,
 	last_int: bool,
@@ -23,7 +25,7 @@ impl State {
 	fn gen<T: Rng>(&mut self, expr: &Expr, rng: &mut T) {
 		match expr {
 			Expr::INT(nbr) => {
-				if rng.gen_range(0..10) == 0 {
+				if rng.gen_range(0..REPL_PROB) == 0 {
 					let sub = rng.gen_range(-20..=20);
 					let temp_expr = Expr::FUNC(vec![
 						Expr::INT(3),

@@ -1,7 +1,7 @@
 # X 16
 # Y 17
 # ADD 32
-# PRINTX 33
+# POVERRIDE 33
 # BLOCK 4
 
 
@@ -9,7 +9,7 @@
 (LET BLOCK 0 
 	// Give X the values of its ascii code
 	(LET X 88
-		(LET PRINTX (PRINT (X))
+		(LET POVERRIDE (PRINT (X))
 			(BLOCK 
 				// Print normally
 				(PRINT 88)
@@ -18,7 +18,7 @@
 				(PRINT (X))
 
 				// Print by function
-				(PRINTX)
+				(POVERRIDE)
 			
 				(LET ADD (SUB (-1) (SUB 0 (-2)))
 					(BLOCK 
@@ -37,7 +37,7 @@
 						(LET X 120
 							(BLOCK
 								(PRINT (X))
-								(PRINTX)
+								(POVERRIDE)
 							)
 						)
 					)
