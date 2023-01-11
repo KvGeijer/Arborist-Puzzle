@@ -13,11 +13,11 @@ From your academic days you remember that syntax trees grow from a very specific
 ```
 
 After nurturing the tree back to a lively state you can then evaluate it recursively from the root. The value of an leaf is its integer. The value of a branch depends on the value of its first expression:
-* If it is 1 it first evaluates the second expression:
-  * If that is larger than 0, it returns the value of the third expression
-  * Otherwise, it returns the value of the fourth expression
-* If it is 3 it instead returns the value of the second expression subtracted by the value of the third expresion
-* Otherwise it returns the sum of the values of all the contained expressions.
+* 1: It first evaluates the second expression:
+  * If that is larger than 0, it returns the value of the third expression,
+  * Otherwise, it returns the value of the fourth expression.
+* 3: It returns the value of the second expression subtracted by the value of the third expresion.
+* Otherwise, it returns the sum of the values of all the contained expressions.
 
 Some simple example roots: 
 ```
