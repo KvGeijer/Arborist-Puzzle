@@ -1,10 +1,10 @@
 # Grammar Ideas
 
-This document is for myself to flesh out the ideas for my grammar. 
+This document is for myself to flesh out the ideas for my grammar. It is very outdated, and the ideas changed a lot in the end. But can be fun to look back on.
 
 ## Name
 
-maybe something related to Lisp, since it is built around those horrible brackets
+Maybe something related to Lisp, since it is built around those horrible brackets
 
 ## Formal Grammar
 
@@ -16,10 +16,10 @@ func := expr expr*                  \
     | LET expr expr                 \
     | IF expr expr expr             \
     | PRINT expr                    \
-    | BLOCK '(' expr+ ')'           \
+    | BLOCK '(' expr+ ')' # Replaced with empty func\
     | SUB expr expr
 
-int := 0|[1-9]+            
+int := 0|-?[1-9][0-9]*            
 
 ### Functions
 
