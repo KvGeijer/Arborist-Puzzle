@@ -12,7 +12,7 @@ From your academic days you remember that syntax trees grow from a very specific
 (0 4 0(0 16 88(0 33(2(16))(4(2 88)(2(16))(33)(0 32(3(-1)(3 0(-2)))(4(2(32(16)2))(2(3(16)23))))(0 17 89(1(3(16)(17))(999)(0 16 120(4(2(16))(33)))))))))
 ```
 
-After nurturing the tree back to a lively state you can then evaluate it recursively from the root. The value of an leaf is its integer. The value of a branch depends on the value of its first expression:
+After nurturing the tree back to a lively state you can then evaluate it recursively from the root. The value of a leaf is its integer. The value of a branch depends on the value of its first expression:
 * If the value is 1: It first evaluates the second expression:
   * If that is larger than 0, it returns the value of the third expression,
   * Otherwise, it returns the value of the fourth expression.
