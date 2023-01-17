@@ -2,7 +2,7 @@
 
 After evaluating the root you hear someone sniggering in the far corner. Apparently it is an IT elf who decided to hide in the factory while all others went to the tropical island. A way to skip work without going to an icky sticky island, smart!
 
-The elf continues laughing and then tells you that your interpretation of the syntax tree is severely outdated. Nowdays the syntax tree is only used to grow the more complex _binding tree_ where each limb binds a value to a branch expression. Limbs are grown from the _active limb_  by [interpreting](https://craftinginterpreters.com/) expressions in the syntax tree similarly to last time. The active limb can move during evaluation of an expression, but always move back at the end.
+The elf continues laughing and then tells you that your interpretation of the syntax tree is severely outdated. Nowdays the syntax tree is only used to grow the more complex _binding tree_ where each limb binds a value to a branch expression. Limbs are grown from the _active limb_  by [interpreting](https://craftinginterpreters.com/) expressions in the syntax tree similarly to last time. The active limb can change during evaluation of an expression, but always returns when the evaluation is done.
 
 To evaluate a branch expression you still check the value of the first expression:
 * If the value is 0: The binding tree grows a new limb which binds the value of the second expression to the third expression. That limb becomes the active limb while the fourth expression is evaluated and returned.
