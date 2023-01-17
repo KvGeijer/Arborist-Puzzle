@@ -5,15 +5,15 @@ After evaluating the root you hear someone sniggering in the far corner. Apparen
 The elf continues laughing and then tells you that your interpretation of the syntax tree is severely outdated. Nowdays the syntax tree is only used to grow the more complex _binding tree_ where each limb binds a value to a branch expression. Limbs are grown from the _active limb_  by [interpreting](https://craftinginterpreters.com/) expressions in the syntax tree similarly to last time. The active limb can move during evaluation of an expression, but always move back at the end.
 
 To evaluate a branch expression you still check the value of the first expression:
-* 0: The binding tree grows a new limb which binds the value of the second expression to the third expression. That limb becomes the active limb while the fourth expression is evaluated and returned.
-* 1: Conditionally _evaluates_ and returns the third or fourth expression like last time.
-* 2: Grows and drops a _flower_ containing the value of the second expsession.
-* 3: Subtracts the values of the second and third expressions, like last time.
-* _x_: The remaining expressions are evalued and their values become arguments, numbered -1, -2... Searching towards the root for the first limb binding x to some _e_, from that limb grows a long limb binding all arguments to their numbers. The long limb becomes the active one while e is evaluated and returned. 
+* If the value is 0: The binding tree grows a new limb which binds the value of the second expression to the third expression. That limb becomes the active limb while the fourth expression is evaluated and returned.
+* If the value is 1: Conditionally _evaluates_ and returns the third or fourth expression like last time.
+* If the value is 2: Grows and drops a _flower_ containing the value of the second expsession.
+* If the value is 3: Subtracts the values of the second and third expressions, like last time.
+* Oterwise, for value _x_: The remaining expressions are evalued and their values become arguments, numbered -1, -2... Searching towards the root for the first limb binding x to some _e_, from that limb grows a long limb binding all arguments to their numbers. The long limb becomes the active one while e is evaluated and returned. 
 
 Each binding tree spells out a message when its dropped flowers are interpreted as ASCII values. 
 
-The large example from the last part gives the message `XXXZAxX` and can be represented by a [psuedo root](https://en.wikipedia.org/wiki/Pseudocode) as:
+The large example from the last part gives the message `XXXZAxX` and is represented by a [psuedo root](https://en.wikipedia.org/wiki/Pseudocode) below. For improved readability some recurring values are replaced by strings (```BIND = 0```, ```IF = 1```, ```FLOWER = 2```, ```SUB = 3```, ```FLOWERX = 8```, ```ADD = 9```, ```X = 10```, ```Y = 11```).
 ```
 (BIND 4 0 
 	(BIND X 88
