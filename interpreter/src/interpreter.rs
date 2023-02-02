@@ -3,8 +3,8 @@ use typed_arena::Arena;
 use crate::parser::Expr;
 
 struct Namespace<'a> {
-	binding: (i32, &'a Expr),
-	base: Option<&'a Namespace<'a>>,
+    binding: (i32, &'a Expr),
+    base: Option<&'a Namespace<'a>>,
 }
 
 pub fn interpret(expr: &Expr) -> i32 {
@@ -20,7 +20,10 @@ fn eval<'a>(expr: &'a Expr, base: Option<&'a Namespace<'a>>) -> i32 {
                 0 => {
                     // Bind
                     let id = eval(&exprs[1], base);
-                    let ns = Namespace{binding: (id, &exprs[2]), base: base};
+                    let ns = Namespace {
+                        binding: (id, &exprs[2]),
+                        base: base,
+                    };
                     eval(&exprs[3], Some(&ns))
                 }
                 1 => {
@@ -49,11 +52,14 @@ fn eval<'a>(expr: &'a Expr, base: Option<&'a Namespace<'a>>) -> i32 {
                     // Temp arena for the args
                     let exprarena = Arena::new();
                     let nsarena = Arena::new();
-                    
+
                     for (expr, id) in exprs[1..].into_iter().zip(1..) {
                         let val = eval(expr, base);
                         let argexpr = exprarena.alloc(Expr::INT(val));
-                        ns = nsarena.alloc(Namespace{binding: (-id, argexpr), base: Some(ns)});
+                        ns = nsarena.alloc(Namespace {
+                            binding: (-id, argexpr),
+                            base: Some(ns),
+                        });
                     }
 
                     eval(fexpr, Some(ns))

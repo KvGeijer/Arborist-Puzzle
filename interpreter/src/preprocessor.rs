@@ -1,12 +1,6 @@
 use std::collections::HashMap;
 
-const PREDEF_MACROS: [&str; 4] = [
-    "LET",
-    "IF",
-    "PRINT",
-    "SUB",
-];
-
+const PREDEF_MACROS: [&str; 4] = ["LET", "IF", "PRINT", "SUB"];
 
 pub fn preprocess(content: &str) -> String {
     // Iterate over all lines and applies textual transformations.
@@ -22,12 +16,11 @@ pub fn preprocess(content: &str) -> String {
     let mut program = String::new();
     for raw_line in content.lines() {
         // Remove comments
-        let line: &str = 
-            if let Some(ind) = raw_line.find("//") {
-                &raw_line[..ind]
-            } else {
-                raw_line
-            };
+        let line: &str = if let Some(ind) = raw_line.find("//") {
+            &raw_line[..ind]
+        } else {
+            raw_line
+        };
 
         // Maybe add a macro definition
         if line.get(0..1) == Some(&"#") {
@@ -35,11 +28,8 @@ pub fn preprocess(content: &str) -> String {
                 .trim_start()
                 .split_once(' ')
                 .expect("Must define a body and name for a macro!");
-            
-            macros.insert(
-                name.to_string(),
-                body.to_string()
-            );
+
+            macros.insert(name.to_string(), body.to_string());
         // Replace macros in the line
         } else {
             // Replace macros

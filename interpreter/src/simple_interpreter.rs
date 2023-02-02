@@ -24,9 +24,7 @@ fn eval(expr: &Expr) -> i32 {
                 }
                 _nbr => {
                     // Sum
-					exprs.into_iter()
-						.map(|expr| eval(expr))
-						.sum()
+                    exprs.into_iter().map(|expr| eval(expr)).sum()
                 }
             }
         }

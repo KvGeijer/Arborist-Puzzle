@@ -1,9 +1,9 @@
-mod preprocessor;
-mod tokenizer;
-mod interpreter;
-mod simple_interpreter;
-mod parser;
 mod generator;
+mod interpreter;
+mod parser;
+mod preprocessor;
+mod simple_interpreter;
+mod tokenizer;
 
 use clap::Parser;
 use std::io::Write;
@@ -22,10 +22,9 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    let contents = std::fs::read_to_string(&args.file)
-        .expect("Could not find file");
+    let contents = std::fs::read_to_string(&args.file).expect("Could not find file");
 
-    let preprocessed = preprocessor::preprocess(&contents);    
+    let preprocessed = preprocessor::preprocess(&contents);
 
     let tokens = tokenizer::tokenize(preprocessed);
 
