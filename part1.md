@@ -21,10 +21,10 @@ After nurturing the tree back to a lively state you can then evaluate it recursi
 
 Some simple example roots: 
 ```
-(0 1 2 3) -> 6
-( 3  5 4) -> 1
-((3) 5 4) -> 1
-(1 0 1 2) -> 2
+(0 1 2 3)     -> 6
+(3       5 4) -> 1
+((3 3 0) 5 4) -> 1
+(1 0 1 2)     -> 2
 ```
 and the value of the larger example above is 681. 
 
