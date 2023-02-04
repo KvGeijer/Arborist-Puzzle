@@ -13,7 +13,7 @@ To evaluate a branch you still check the value of the first expression:
 
 Each binding tree spells out a message when its dropped flowers are interpreted as ASCII values. 
 
-The large example from the last part gives the message `XXXZAxX` and is represented by a [psuedo root](https://en.wikipedia.org/wiki/Pseudocode) below. For improved readability some recurring values are replaced by strings (```BIND = 0```, ```IF = 1```, ```FLOWER = 2```, ```SUB = 3```, ```FLOWERX = 8```, ```ADD = 9```, ```X = 10```, ```Y = 11```).
+The large example from the last part gives the message `XXXZAxX` and is represented by a [psuedo root](https://en.wikipedia.org/wiki/Pseudocode) below. For improved readability some recurring values are replaced by strings (```BIND = 0```, ```IF = 1```, ```FLOWER = 2```, ```SUB = 3```, ```X = 16```, ```Y = 17```, ```ADD = 32```, ```FLOWERX = 33```).
 ```
 (BIND 4 0 
 	(BIND X 88
