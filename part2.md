@@ -2,16 +2,25 @@
 
 After evaluating the root you hear someone sniggering in the far corner. Apparently it is an IT elf who decided to hide in the factory while all others went to the tropical island. A way to skip work without going to an icky sticky island, smart!
 
-The elf continues laughing and then tells you that your interpretation of the syntax tree is severely outdated. Nowdays the syntax tree is only evaluated to grow the more complex _binding tree_ where each _limb_ binds a value to an expression. Limbs are grown from the _active limb_ by [interpreting](https://craftinginterpreters.com/) expressions in the syntax tree similarly to last time. The active limb can change during evaluation of an expression, but always returns when the evaluation is done, and it starts at the root of the binding tree.
+The elf continues laughing and then tells you that your interpretation of the syntax tree is severely outdated. Nowdays the syntax tree is only evaluated to grow the more complex _binding tree_ where _limbs_ binds values to expressions. Limbs are grown from the _active limb_ by [interpreting](https://craftinginterpreters.com/) expressions in the syntax tree similarly to last time. The active limb can change during evaluation of an expression, but always returns when the evaluation is done, and it starts at the root of the binding tree.
 
-To evaluate a branch you still check the value of the first expression:
-* If the value is 0: The binding tree grows a new limb which binds the value of the second expression to the third expression. That limb becomes the active limb while the fourth expression is evaluated and returned.
-* If the value is 1: Conditionally _evaluates_ and returns the third or fourth expression like last time.
-* If the value is 2: Grows and drops a _flower_ containing the value of the second expsession.
-* If the value is 3: Subtracts the values of the second and third expressions, like last time.
-* Oterwise, for value _x_: The remaining expressions are evalued and their values become arguments, numbered -1, -2... Search from the active limb towards the root for the first limb binding x to some _e_, from that limb grows a long limb binding all arguments to their numbers. The long limb becomes the active one while e is evaluated and returned. 
+The value of a leaf is still its integer and the value of a branch still depends on what its first expression evaluates to.
+* If it is ```0```: From the active limb grows a new limb which binds the value of the second expression to the third expression (see the last point for what this binding is used for). That limb becomes the active limb while the fourth expression is evaluated and returned.
+* If it is ```1```: Conditionally evaluates and returns the third or fourth expression depending on if the value of the second expression is positive or not, like last time.
+* If it is ```2```: Drops a _flower_ containing the value of the second expression. This is used to get information from the tree.
+* If it is ```3```: Subtracts the values of the second and third expressions, like last time.
+* Oterwise, for any number ```x```: First, the remaining expressions are evalued and their values are denoted arguments, numbered ```-1```, ```-2```... Then the limb ```l``` is found which binds ```x``` to some ```e```, where ```l``` is the first such root on the path from the active limb to the root. From ```l``` there now grows a new long new limb, binding all arguments to their numbers. Finally, the long limb becomes the active one while ```e``` is evaluated and returned. 
 
 Each binding tree spells out a message when its dropped flowers are interpreted as ASCII values. 
+
+Here are three smaller examples which all give the message ```X```:
+```
+(0 4 88(2(4)))
+
+(0 4(3 -1(-1))(2(4 -89)))
+
+(0 4 1(0 5(4)(0 4 89(2(3(4)(5))))))
+```
 
 The large example from the last part gives the message `XXXZAxX` and is represented by a [psuedo root](https://en.wikipedia.org/wiki/Pseudocode) below. For improved readability some recurring values are replaced by strings (```BIND = 0```, ```IF = 1```, ```FLOWER = 2```, ```SUB = 3```, ```X = 16```, ```Y = 17```, ```ADD = 32```, ```FLOWERX = 33```).
 ```
@@ -31,7 +40,7 @@ The large example from the last part gives the message `XXXZAxX` and is represen
 				)
 				(BIND Y 89 
 					(IF (SUB (X) (Y)) 
-						-1
+						666
 						(BIND X 120
 							(4
 								(FLOWER (X))
