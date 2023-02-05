@@ -70,7 +70,7 @@ fn eval<'a>(expr: &'a Expr, base: Option<&'a Namespace<'a>>) -> i32 {
 }
 
 fn lookup<'a>(id: i32, base: Option<&'a Namespace<'a>>) -> &'a Namespace<'a> {
-    let ns = base.expect("Could not find nbr!");
+    let ns = base.expect(&format!("Could not find {}!", id));
     if ns.binding.0 == id {
         ns
     } else {
