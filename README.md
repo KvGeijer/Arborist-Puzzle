@@ -1,6 +1,6 @@
 # North Pole Arborist Puzzle
 
-This repo contains the code for a puzzle I created for my flatmate [Samuel Sellec](https://www.linkedin.com/in/samuel-selleck-027a41150/) who in return made me [one](https://voluble-bavarois-27b66a.netlify.app/problems/alien-house/). They were both inspired by the fantastic [Advent of Code](https://adventofcode.com/2022/about) which [Eric Wastl](http://was.tl/) sets up each year. Finalizing this puzzle took more time than I had imagined, especially ironing out the ideas and writing the problem descriptions. It made me even more impressed by what Eric does every year, although I hope he has a better workflow.
+This repo contains the code for a puzzle I created for my flatmate [Samuel Selleck](https://www.linkedin.com/in/samuel-selleck-027a41150/) who in return made me [one](https://voluble-bavarois-27b66a.netlify.app/problems/alien-house/). They were both inspired by the fantastic [Advent of Code](https://adventofcode.com/2022/about) which [Eric Wastl](http://was.tl/) sets up each year. Finalizing this puzzle took more time than I had imagined, especially ironing out the ideas and writing the problem descriptions. It made me even more impressed by what Eric does every year, although I hope he has a better workflow.
 
 ## Finding the problem
 
